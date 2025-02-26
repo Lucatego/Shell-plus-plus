@@ -9,8 +9,9 @@ private:
 	std::vector<std::string> tokens;
 
 	bool isValid = false;
-private:
 
+private:
+	void CleanInput();
 
 public:
 	Command();
@@ -18,8 +19,8 @@ public:
 	~Command();
 
 public:
-	bool Parse();
 	uint64_t Execute();
+
 	std::string GetCommand();
 	
 };

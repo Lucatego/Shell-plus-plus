@@ -1,4 +1,5 @@
 #include "Shell.h"
+#include "SPP_Codes.h"
 
 #include <iostream>
 #include <iomanip>
@@ -54,6 +55,15 @@ void Shell::GetHostname() {
     }
 }
 
+void Shell::LoadAvailableCommands() {
+    /*
+     *  TODO: 
+     *  El shell también deberia ser capaz de permitir al usuario cargar sus propios comandos con la estrucura clásica de un programa en C/C++ e inclusive otros lenguajes.
+     *  Para esto se usará una pequeña DB en SQLite, ya que solo necesitamos una tabla simple. Además nos beneficiará si es que necesitamos escalar el proyecto para guardar otro
+     *  tipo de registros. (Ej: Mostrar colores, cambiar el Header, ...)
+     */
+}
+
 void Shell::ReadUser() {
     std::cout << this->username << '@' << this->hostname << " (" << this->uStatus << ") " << this->currentPath << std::endl;
     std::cout << "> ";
@@ -66,9 +76,31 @@ Command Shell::CreateCommand() {
     return c;
 }
 
+bool Shell::FindCommand(const Command &c) {
+    // Here the shell must verify the commands that are avaliable
+
+    return true;
+}
+
+void Shell::ExecuteCommand(Command &c) {
+    uint64_t status = 0;
+
+    switch ((status = c.Execute())) {
+    case NO_COMMAND_STORED:
+        std::cerr << "Error: Could not parse the tokens. Please try again.\n";
+        break;
+    case NO_PROCESS_CREATED:
+        std::cerr << "Error: Could not create the process.\n";
+        break;
+    default:
+        break;
+    }
+}
+
 // Constructors & Destructors
 
 Shell::Shell() {
+    // Rework, this can be removed:
     if (this->enableHeader) { 
         this->FirstHeader(); 
         this->enableHeader = false;
@@ -76,6 +108,7 @@ Shell::Shell() {
     this->GetCurrentPath();
     this->GetUsername();
     this->GetHostname();
+    this->LoadAvailableCommands();
 }
 
 Shell::~Shell() {
@@ -85,21 +118,19 @@ Shell::~Shell() {
 // Public Functions
 
 void Shell::Run() {
-    uint64_t status = 0;
+    // Loop
     while (true) {
-        // Start
         this->ReadUser();
+        if (input == "") continue;
         if (input == "exit") exit(0);
-
+        // Command creation
         Command c(this->input);
-        // Empty input
-        if (c.GetCommand() == "") continue;
-        // Command not found
-        if (!c.Parse()) {
+        // Command not found in register -> TODO: Create register system
+        if (!this->FindCommand(c)) {
             std::cout << c.GetCommand() << ": Commnand not found.\n";
             continue;
         }
         // Execute
-        status = c.Execute();
+        if(c.GetCommand() != "") this->ExecuteCommand(c);
     }
 }
