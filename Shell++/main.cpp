@@ -5,9 +5,7 @@
 int main() {
     Shell shell;
 
-    while (true) {
-        shell.Run();
-    }
+    shell.Run();
 
     return 0;
 }

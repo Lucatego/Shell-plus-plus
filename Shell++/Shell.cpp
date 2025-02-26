@@ -85,18 +85,21 @@ Shell::~Shell() {
 // Public Functions
 
 void Shell::Run() {
-    int state = 0;
+    uint64_t status = 0;
     while (true) {
+        // Start
         this->ReadUser();
+        if (input == "exit") exit(0);
+
         Command c(this->input);
-        
+        // Empty input
         if (c.GetCommand() == "") continue;
-
-        if (c.Validate()) {
-
-        }
-        else {
+        // Command not found
+        if (!c.Parse()) {
             std::cout << c.GetCommand() << ": Commnand not found.\n";
+            continue;
         }
+        // Execute
+        status = c.Execute();
     }
 }

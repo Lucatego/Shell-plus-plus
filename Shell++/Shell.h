@@ -9,13 +9,12 @@ private:
 	std::string currentPath;
 	std::string username;
 	std::string hostname;
+	bool enableHeader = true;
 
 	std::string uStatus = "USER";
 	bool isAdmin = false;
 
 	std::string input;
-
-	bool enableHeader = true;
 	
 private:
 	void FirstHeader();
@@ -25,11 +24,13 @@ private:
 
 	void ReadUser();
 	Command CreateCommand();
+
 public:
 	Shell();
 	~Shell();
 
 public:
 	void Run();
+
 };
 
