@@ -138,6 +138,9 @@
     <ClInclude Include="Shell.h" />
     <ClInclude Include="SPP_Codes.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SPP_DDL.sql" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

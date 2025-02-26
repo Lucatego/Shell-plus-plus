@@ -8,9 +8,9 @@
 // Private Functions
 
 void Command::CleanInput() {
-	std::string cleanInput;
 	// 1. Remove whitespaces at start
 	// 2. Remove double whitespaces
+	// 3. TODO: Keep text inside " or ' the same
 	char lastLetter = 0, c;
 	std::string clean("");
 	bool endsWithSpace = true;

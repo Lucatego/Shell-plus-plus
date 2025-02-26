@@ -5,7 +5,7 @@
 
 class Command {
 private:
-	std::string userInput;
+	std::string userInput; // Parsed input
 	std::vector<std::string> tokens;
 
 	bool isValid = false;
