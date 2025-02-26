@@ -1,0 +1,24 @@
+# Carpetas de compilación y binarios
+x64/
+Debug/
+Release/
+*.obj
+*.exe
+*.ilk
+*.pdb
+*.lib
+*.exp
+*.dll
+
+# Archivos de configuración de Visual Studio
+.vs/
+*.suo
+*.user
+*.vcxproj.filters
+*.VC.db
+
+# Archivos de caché y temporales
+ipch/
+*.log
+*.tlog
+*.lastbuildstate
